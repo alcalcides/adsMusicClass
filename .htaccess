@@ -1,0 +1,45 @@
+# HTID:9776900: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
+php_value display_errors 1
+# DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:9776900:
+
+php_value display_errors On
+php_flag magic_quotes 1
+php_flag magic_quotes_gpc 1
+php_value mbstring.http_input auto
+php_value date.timezone America/Bahia
+
+Options +FollowSymLinks
+RewriteEngine On
+#RewriteBase /localhost
+
+#Retirada do www
+#RewriteCond %{HTTP_HOST} .
+#RewriteCond %{HTTP_HOST} !^adsmusicclass\.tk
+#RewriteRule (.*) http://adsmusicclass.tk/$1 [R=301]
+#RewriteRule (.*) localhost/adsmusicclass/$1 [R=301]
+
+#remoção de "/" no final da url
+#RewriteCond %{REQUEST_URI} (.*)$
+#RewriteRule ^(.+)/$  /$1 [R=301]
+
+#Isenção dos arquivos e diretórios da url amigável
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+
+#Direcionamento das Páginas de Erro
+ErrorDocument 401 /_views/_mistakes/falhaAutorizacao.php
+ErrorDocument 404 /_views/_mistakes/naoEncontrado.php
+ErrorDocument 403 /_views/_mistakes/acessoNegado.php
+ErrorDocument 500 /_views/_mistakes/erroInterno.php
+
+#Reescritas e demais redirecionamentos
+RewriteRule ^adsMusicClass/home$ /adsMusicClass/_views/home.php [NC]
+RewriteRule ^agenda$ /_views/agenda.php [NC]
+RewriteRule ^conteudo$ /_views/conteudo.php [NC]
+RewriteRule ^exercicios$ /_views/exercicios.php [NC]
+RewriteRule ^avaliacoes$ /_views/avaliacoes.php [NC]
+RewriteRule ^contato$ /_views/contato.php [NC]
+RewriteRule ^doacoes$ /_views/doacoes.php [NC]
+RewriteRule ^frequencia$ /_views/frequencia.php [NC]
+RewriteRule ^resultados$ /_views/resultados.php [NC]
+RewriteRule ^sobre$ /_views/sobre.php [NC]
